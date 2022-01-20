@@ -1,0 +1,12 @@
+//SQL code for extracting Text data from Google Cloud Platform (GCP) to extract data from MIMIC III
+
+######Simulation Text data###########
+SELECT * 
+FROM `physionet-data.mimiciii_notes.noteevents` 
+WHERE SUBJECT_ID IN (
+SELECT SUBJECT_ID 
+FROM `physionet-data.mimiciii_clinical.diagnoses_icd` 
+WHERE ICD9_CODE = "41401" 
+GROUP BY SUBJECT_ID
+) 
+

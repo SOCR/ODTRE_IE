@@ -1,0 +1,92 @@
+#######Application Hypertension Emergency Queries
+
+(1) vitals.csv
+
+SELECT L2.SUBJECT_ID,l1.* 
+FROM `physionet-data.mimiciii_derived.pivoted_vital` l1
+LEFT JOIN `physionet-data.mimiciii_derived.icustay_detail` L2 
+ON L1.ICUSTAY_ID=L2.ICUSTAY_ID
+WHERE l1.ICUSTAY_ID IN (
+	SELECT ICUSTAY_ID 
+	FROM physionet-data.mimiciii_derived.vitalsfirstday 
+	WHERE SYSBP_MAX >180
+	) 
+ AND l1.SYSBP IS NOT NULL
+
+
+(2) firstday_vital.csv
+
+SELECT * 
+FROM physionet-data.mimiciii_derived.vitalsfirstday 
+WHERE SYSBP_MAX >180
+
+(3) demo.csv
+
+SELECT SUBJECT_ID,HADM_ID,CHARTTIME,HEIGHT,WEIGHT,BPSYS,BPDIAS 
+FROM `physionet-data.mimiciii_derived.echodata_structured`
+WHERE HADM_ID IN (
+	SELECT HADM_ID 
+	FROM physionet-data.mimiciii_derived.vitalsfirstday 
+	WHERE SYSBP_MAX >180
+)
+
+(4) drugs.csv
+
+SELECT * 
+FROM `physionet-data.mimiciii_clinical.prescriptions` 
+WHERE HADM_ID IN (
+	SELECT HADM_ID 
+	FROM physionet-data.mimiciii_derived.vitalsfirstday 
+	WHERE SYSBP_MAX >180)
+ AND DRUG_NAME_GENERIC IN ("Atenolol","Labetalol","Carvedilol","Propranolol","Sotalol","Nadolol","Metoprolol","Esmolol",
+"Bumetanide","Chlorothiazide","Chlorthalidone","Hydrochlorothiazide","Furosemide","Metolazone","Torsemide","Captopril","Lisinopril","Moexipril","Ramipril","Trandolapril","Enalapril Maleate","Enalaprilat","Felodipine","Nifedipine","Nimodipine","Nicardipine","Clevidipine","Diltiazem","Nitroglycerin","Nitroprusside")
+
+(5) hyper_text_ie.csv
+
+SELECT * 
+FROM `physionet-data.mimiciii_notes.noteevents` 
+WHERE HADM_ID IN (
+	SELECT HADM_ID 
+	FROM physionet-data.mimiciii_derived.vitalsfirstday 
+	WHERE SYSBP_MAX >180) 
+ AND CATEGORY IN ("Physician","Discharge summary","Echo","General")
+
+(6) death.csv
+
+SELECT SUBJECT_ID,GENDER,DOB,DOD 
+FROM `physionet-data.mimiciii_clinical.patients` 
+WHERE SUBJECT_ID IN (
+	SELECT DISTINCT SUBJECT_ID 
+	FROM physionet-data.mimiciii_derived.vitalsfirstday 
+	WHERE SYSBP_MAX >180)
+
+(7) kidney_diabeties_copd_hyper.csv
+
+SELECT l1.SUBJECT_ID,l1.HADM_ID,l1.ICD9_CODE,l2.LONG_TITLE 
+FROM (
+	SELECT SUBJECT_ID, ICD9_CODE,HADM_ID 
+	FROM `physionet-data.mimiciii_clinical.diagnoses_icd` 
+	WHERE HADM_ID IN (
+		SELECT HADM_ID 
+		FROM physionet-data.mimiciii_derived.vitalsfirstday 
+		WHERE SYSBP_MAX >180)
+	AND (ICD9_CODE = "4019" OR ICD9_CODE IN 
+	(
+		SELECT ICD9_CODE 
+		FROM `physionet-data.mimiciii_clinical.d_icd_diagnoses` 
+		WHERE LONG_TITLE like '%Diabetes%' or LONG_TITLE like 
+		'%Obstructive chronic bronchitis%' or LONG_TITLE like '%Chronic kidney disease%'))) AS l1
+LEFT JOIN `physionet-data.mimiciii_clinical.d_icd_diagnoses` l2 
+ON l1.ICD9_CODE=l2.ICD9_CODE
+
+(8) demo_dx.csv
+
+SELECT SUBJECT_ID, HADM_ID, ETHNICITY, DIAGNOSIS 
+FROM physionet-data.mimiciii_clinical.admissions
+WHERE HADM_ID IN (
+	SELECT HADM_ID 
+	FROM physionet-data.mimiciii_derived.vitalsfirstday 
+	WHERE SYSBP_MAX >180
+)
+
+
