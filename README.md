@@ -122,4 +122,4 @@ Team
 References
 ==========
 
-* Zhou, N, Brook, RD, Dinov, ID, and Wang, L (2022). [Optimal dynamic treatment regime estimation using information extraction from unstructured clinical text](https://doi.org/10.1002/bimj.202100077), [Biometrical Journal](https://onlinelibrary.wiley.com/journal/15214036), DOI: [https://doi.org/10.1002/bimj.202100077](https://doi.org/10.1002/bimj.202100077), *in press*.
+* Zhou, N, Brook, RD, Dinov, ID, and Wang, L (2022). [Optimal dynamic treatment regime estimation using information extraction from unstructured clinical text](https://doi.org/10.1002/bimj.202100077), [Biometrical Journal](https://onlinelibrary.wiley.com/journal/15214036), DOI: [https://doi.org/10.1177/17483026211065379](10.1177/17483026211065379), *first online*.
