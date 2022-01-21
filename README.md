@@ -116,10 +116,10 @@ This subfolder contains final text related simulation/application data and the P
 Team
 ====
 
-[Nina Zhou](https://sph.umich.edu/biostat/phd-student-profiles/zhou-nina.html), Robert D. Brook, [Ivo D. Dinov](https://umich.edu/~dinov), [Lu Wang](https://sph.umich.edu/faculty-profiles/wang-lu.html), and [SOCR Team](http://www.socr.umich.edu/people/).
+[Nina Zhou](https://sph.umich.edu/biostat/phd-student-profiles/zhou-nina.html), Robert D. Brook, [Ivo D. Dinov](https://umich.edu/~dinov), [Lu Wang](https://sph.umich.edu/faculty-profiles/wang-lu.html), and [SOCR Team](https://www.socr.umich.edu/people/).
 
 
 References
 ==========
 
-* Zhou, N, Brook, RD, Dinov, ID, and Wang, L (2022). [Optimal dynamic treatment regime estimation using information extraction from unstructured clinical text](https://doi.org/10.1002/bimj.202100077), [Biometrical Journal](https://onlinelibrary.wiley.com/journal/15214036), DOI: [https://doi.org/10.1177/17483026211065379](10.1177/17483026211065379), *first online*.
+* Zhou, N, Brook, RD, Dinov, ID, and Wang, L (2022). [Optimal dynamic treatment regime estimation using information extraction from unstructured clinical text](https://doi.org/10.1177/17483026211065379), [Biometrical Journal](https://onlinelibrary.wiley.com/journal/15214036), DOI: [10.1177/17483026211065379](https://doi.org/10.1177/17483026211065379), *first online*.
